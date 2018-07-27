@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Menu;
-use App\Ingredients;
+use App\Ingredient;
 
 class MenuController extends Controller
 {
@@ -26,9 +26,8 @@ class MenuController extends Controller
      */
     public function create()
     {
-        $categories = Menu::pluck('item_category', 'item_id');
-        $ingredients = Ingredients::pluck('ing_name', 'ing_id');
-        return view('menu.create')->with('categories', $categories)->with('ingredients', $ingredients);
+        $ingredients = Ingredient::pluck('ing_name', 'ing_id');
+        return view('Menu.create')->with('ingredients', $ingredients);
     }
 
     /**
@@ -41,8 +40,7 @@ class MenuController extends Controller
     {
         $this->validate($request, [
             'item_name' => 'required',
-            // 'cover_image' => 'image|nullable|max:1999'
-            'item_category' => 'required',
+            // 'cover_image' => 'image|nullable|max:1999',
             'item_ingredients' => 'required'
         ]);
         
@@ -51,7 +49,6 @@ class MenuController extends Controller
         $item = new Menu;
         $item->item_name             = $request->input('item_name');
         $item->item_description      = $request->input('item_describtion');
-        $item->item_category         = $request->input('item_category');
         $item->item_ingredients      = $request->input('item_ingredients');
             
         //request for something to get the ingredients linked with the items from menu 
@@ -81,7 +78,9 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item= Menu::find($id);
+        $ingredients = Ingredient::pluck('ing_name', 'ing_id');
+        return view('Menu.edit')->with('item', $item)->with('ingredients', $ingredients);
     }
 
     /**
@@ -93,7 +92,25 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'item_name' => 'required',
+            // 'cover_image' => 'image|nullable|max:1999',
+            'item_ingredients' => 'required'
+        ]);
+        
+        //Create item
+        
+        $item = Menu::find($id);
+        $item->item_name             = $request->input('item_name');
+        $item->item_description      = $request->input('item_describtion');
+        $item->item_ingredients      = $request->input('item_ingredients');
+            
+        //request for something to get the ingredients linked with the items from menu 
+
+        // $item->cover_image = $fileNameToStore;
+        $item->save();
+
+        return redirect('/menu')->with('success', 'item Edited Successfully');
     }
 
     /**
@@ -104,6 +121,8 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Menu::find($id);
+        $item->delete();
+        return redirect('/menu')->with('success', 'Item Removed');
     }
 }

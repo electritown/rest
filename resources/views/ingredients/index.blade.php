@@ -17,16 +17,22 @@
                 </div>
                     <div class="col-md-8 col-sm-4">
                         <h3>{{$ing->ing_name}}</h3>
-                        <h4>Quantity : {{$ing->ing_quantity}} KG</h4>
-                        <small>Last Updated on {{$ing->updated_at}}</small>
-                        
+                       
+                            <div class="col-md-3 col-sm-3" >
+                                    <h4>Quantity : {{$ing->ing_quantity}} Kg</h4>
+                             
+                                <div class="form-group ">
+                                    {{Form::label('Amount', 'Amount')}}
+                                    {{Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Amount', 'autocomplete' => 'off'])}}
+                                </div>
+                            </div>
                         <!-- Deleting -->
-                        {!!Form::open(['action' => ['IngredientsController@destroy', $ing->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                        {!!Form::open(['action' => ['IngredientsController@destroy', $ing->ing_id], 'method' => 'POST', 'class' => 'pull-right'])!!}
                             {{Form::hidden('_method', 'DELETE')}}
                             {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                         {!!Form::close()!!}            
-                        <a href="/ingredients/{{$ing->id}}/edit" class="btn btn-primary pull-right" role="button" style="margin-right:8px;">Edit</a>            
-                    </div>
+                        <a href="/ingredients/{{$ing->ing_id}}/edit" class="btn btn-primary pull-right" role="button" style="margin-right:8px;">Edit</a>            
+                    </div>  
                 </div>
             </div>
         @endforeach

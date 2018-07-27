@@ -1,5 +1,6 @@
 <?php
 
+use TCG\Voyager\Facades\Voyager;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +16,22 @@ Route::get('/', 'PagesController@index');
 Route::get('/orders', 'PagesController@orders');
 
 Route::resource('ingredients', 'IngredientsController');
-Route::resource('menu', 'MenuController');
-Route::get('/menu/createcat', 'MenuController@createcat');
+Route::resource('meals', 'MealsController');
+Route::resource('users', 'UserController');
+Route::resource('categories', 'CategoriesController');
+Route::resource('cart', 'CartsController');
+Route::resource('reservation', 'ReservationsController');
+Route::get('/f',function(){
+    return Voyager::view('voyager::test');
+
+});
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
+Route::get('/generate-pdf','HomeController@generatePDF');
+Route::get('/CategoriesController/findCategory/{id}', 'CategoriesController@findCategory');
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\ingredients;
+use App\Ingredient;
 
 class IngredientsController extends Controller
 {
@@ -15,7 +15,7 @@ class IngredientsController extends Controller
      */
     public function index()
     {
-        $ingredients = ingredients::orderBy('updated_at', 'desc')->paginate(10);
+        $ingredients = Ingredient::orderBy('updated_at', 'desc')->paginate(10);
         return view('ingredients.index')->with('ingredients', $ingredients);
     }
 
@@ -44,7 +44,7 @@ class IngredientsController extends Controller
         ]);
 
         //Create Ingredient
-        $ing = new ingredients;
+        $ing = new Ingredient;
         $ing->ing_name = $request->input('name');
         $ing->ing_desc = $request->input('description');
         $ing->ing_quantity = $request->input('quantity');
@@ -73,7 +73,7 @@ class IngredientsController extends Controller
      */
     public function edit($id)
     {
-        $ing = ingredients::find($id);
+        $ing = Ingredient::find($id);
         return view('ingredients.edit')->with('ing', $ing);
     }
 
@@ -92,7 +92,7 @@ class IngredientsController extends Controller
         ]);
 
         //Update Post
-        $ing = ingredients::find($id);
+        $ing = Ingredient::find($id);
         $ing->ing_name = $request->input('name');
         $ing->ing_desc = $request->input('describtion');
         $ing->ing_quantity = $request->input('quantity');
@@ -115,7 +115,7 @@ class IngredientsController extends Controller
      */
     public function destroy($id)
     {
-        $ing = Ingredients::find($id);
+        $ing = Ingredient::find($id);
         $ing->delete();
         return redirect('/ingredients')->with('success', 'Ingredient Removed');
     }
