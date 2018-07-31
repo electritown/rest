@@ -17,6 +17,8 @@ class IngredientMeal extends Migration
             $table->integer('item_id');
             $table->integer('ing_id');
             $table->double('amount');
+            $table->foreign('item_id')->references('item_id')->on('meals');
+            $table->foreign('ing_id')->references('ing_id')->on(' ingredients');
             $table->timestamps();
         });
     }

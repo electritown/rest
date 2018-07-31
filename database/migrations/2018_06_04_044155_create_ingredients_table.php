@@ -24,7 +24,10 @@ class CreateIngredientsTable extends Migration
             $table->increments('ing_id');
             $table->string('ing_name');
             $table->string('ing_desc');
-            $table->integer('ing_quantity');        
+            $table->integer('ing_quantity');     
+            $table->integer('ingcat_id')->unsigned();
+            $table->foreign('ingcat_id')->references('id')->on('ingcategories');
+   
             $table->timestamps();
         });
     }

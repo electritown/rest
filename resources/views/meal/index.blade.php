@@ -1,25 +1,24 @@
 @extends('layouts.app')
 @section('content')
     <h1>Meals</h1>
-        <div class="navbar navbar-inverse" style="background-color:#fff;">
+        <div class="nav nav-pills-rounded">
             <div class="container">
             <div class="navbar-header">
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    @foreach($categories as $cat)
-                    <li ><a href={{ url('/MealsController/findCat/'.$cat->cat_id) }}>{{ $cat->cat_name }}</a></li>
+                    @foreach($supCategories as $supCat)
+                        <li style="margin-right:5px;" class="btn btn-info" href="#">{{$supCat->supcat_name}}</li>
                     @endforeach
-                    
-
                 </ul>
-      
-                
+                <ul class="ml-auto">
+                    <li><a href="/meals/create" class="btn btn-default pull-right">Create Item</a></li>
+                </ul>
             </div><!--/.nav-collapse -->
             </div>
         </div>
-    
-    <a href="/meals/create" class="btn btn-default pull-right">Create Item</a> <br><br>
+
+    <hr />
     @if(count($items) > 0)
         @foreach($items as $item)
             <div class="well">
@@ -45,7 +44,7 @@
                                 {!!Form::close()!!}             
                                 <a href="/meals/{{$item->item_id}}/edit" class="btn btn-primary pull-right" role="button" style="margin-right:8px;">Edit</a>
                                 {{-- make order to the cart --}}
-                                <a href="/cart/{{$item->item_id}}/edit" class="btn btn-success btn pull-right" role="button" style="margin-right:8px;">order</a>
+                                <a href="/cart/{{$item->item_id}}/edit" class="btn btn-success btn pull-right" role="button" style="margin-right:8px;">Order</a>
 
 
                                 {{-- <form action="/cart" method="POST">

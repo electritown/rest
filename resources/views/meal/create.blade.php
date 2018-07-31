@@ -1,8 +1,4 @@
- <?php
- use App\Category;
- $category = Category::All();
- $categoryToSelect=$category->pluck('cat_name','cat_id');
-?> 
+
 @section('content')
 <h1>Create Item</h1>
 {!! Form::open(['action' => 'MealsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
@@ -30,18 +26,14 @@
             <h4>No Ingredients Found</h4>
         @endif
     </div>
-    {{--   $categories = Category::lists('name', 'id'); 
-     --}}
-       
-    {{Form::label  ( 'categories'  ,  'Select Category' ,  ['style' => 'margin-right:80px;']  )  }}
-    {{  Form::select('categories',$categoryToSelect, ['class' => 'form-control'])}}
-     
-      <br /> <br />
+    <div class="form-group">
+        {{Form::label('categories', 'Select Category', ['style' => 'margin-right:80px;'])}}
+        {{Form::select('categories', $catName, $catId, ['class' => 'form-control'])}}
+    </div>
     {{-- <div class="form-group">
-        {{Form::file('cover_image')}}
+        {{  }}Form::file('cover_image')}}
     </div> --}}
-    
+
     {{Form::submit('Submit', ['class' => 'btn btn-primary', 'style' => 'margin-bottom: 150px'])}}
 {!! Form::close() !!}
-
-@endsection 
+@endsection

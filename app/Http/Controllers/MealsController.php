@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Meal;
 use App\Ingredient;
 use App\Category;
+use App\Supcategory;
+
 
 class MealsController extends Controller
 {
@@ -17,9 +19,9 @@ class MealsController extends Controller
     public function index()
     {
         $items = Meal::orderBy('updated_at', 'desc')->paginate(10);
-        $categories = Category::All();
+        $supCategories = Supcategory::All();
 
-        return view('meal.index')->with('items', $items)->with('categories', $categories);
+        return view('meal.index')->with('items', $items)->with('supCategories', $supCategories);
 
     }
 
@@ -58,7 +60,7 @@ class MealsController extends Controller
         $item->item_describtion      = $request->input('item_describtion');
         $item->cat_id                = $request->Input('categories');
         //request for something to get the ingredients linked with the items from menu 
-
+            
         // $item->cover_image = $fileNameToStore;
          $item->save();
 
@@ -74,8 +76,6 @@ class MealsController extends Controller
         
         $ingIds = $request->input('ing_id');
         $amount = $request->input('amount');
-        $catName = $request->input('category');
-        $catId = Category::find($catName);
 
 
         $item->ingredients()->attach($ingIds,['amount'=>$amount]); // Attach ing to the meal.
@@ -156,8 +156,7 @@ class MealsController extends Controller
     }
     public function findCat($id)
     {    //$items = DB::table('meals')->where('cat_id', '=', $id)->get();
-        $items = Meal::where('cat_id',$id)->paginate(10); 
-        Category::All();
+        $items = Meal::where('cat_id',$id)->paginate(10);
          $categories = Category::All();
          return  view('meal.index')->with('items',$items)->with('categories', $categories);
         

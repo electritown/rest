@@ -12,7 +12,7 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li ><a href="/">Home</a></li>
-          <li><a href="/reservation">Tables</a></li>
+          <li><a href="/reservation">Reservations</a></li>
           <li><a href="/meals">Meals</a></li>
           <li><a href="/ingredients">Ingredients</a></li>
           <li><a href="/categories">Categories</a></li>

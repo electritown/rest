@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class SupCategory extends Migration
+class CreateIngcategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class SupCategory extends Migration
      */
     public function up()
     {
-        Schema::create('supcategory', function (Blueprint $table) {
-            $table->increments('supcat_id');
-            $table->string('supcat_name');
+        Schema::create('ingcategories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('ingcat_name');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +27,6 @@ class SupCategory extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supcategory');
+        Schema::dropIfExists('ingcategories');
     }
 }

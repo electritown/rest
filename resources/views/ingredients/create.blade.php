@@ -12,8 +12,12 @@
             {{Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'Description'])}}
         </div>
         <div class="form-group">
-                {{Form::label('quantity', 'Quantity (KG)')}}
-                {{Form::number('quantity', '', ['class' => 'form-control', 'min' => '1', 'placeholder' => 'Quantity'])}}    
+            {{Form::label('quantity', 'Quantity (KG)')}}
+            {{Form::number('quantity', '', ['class' => 'form-control', 'min' => '1', 'placeholder' => 'Quantity'])}}    
+        </div>
+        <div class="form-group">
+            {{Form::label  ( 'categories'  , 'Select Ingredient Category' ,  ['style' => 'margin-right:80px;']  )  }}
+            {{Form::select('ingCategories',$ingcatName, $ingcatId, ['class' => 'form-control'])}}
         </div>
         {{-- <div class="form-group">
             {{Form::file('cover_image')}}

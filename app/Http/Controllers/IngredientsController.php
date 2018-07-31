@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Ingredient;
+use App\ingcategory;
 
 class IngredientsController extends Controller
 {
@@ -26,7 +27,9 @@ class IngredientsController extends Controller
      */
     public function create()
     {
-        return view('ingredients.create');
+        $ingcatName = ingcategory::pluck('ingcat_name', 'id');
+        $ingcatId = ingcategory::pluck('id', 'id');
+        return view('ingredients.create')->with('ingcatName', $ingcatName)->with('ingcatId', $ingcatId);
     }
 
     /**
@@ -48,6 +51,7 @@ class IngredientsController extends Controller
         $ing->ing_name = $request->input('name');
         $ing->ing_desc = $request->input('description');
         $ing->ing_quantity = $request->input('quantity');
+        $ing->ingcat_id = $request->input('ingCategories');
         // $ing->cover_image = $fileNameToStore;
         $ing->save();
 

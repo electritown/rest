@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Meal;
 use App\CategoryMeal ;
-use Illuminate\Support\Facades\DB;
+use App\Supcategory;
 
 class CategoriesController extends Controller
 {
@@ -29,7 +29,9 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        $supCatName = Supcategory::pluck('supcat_name', 'supcat_id');
+        $supCatId = Supcategory::pluck('supcat_id', 'supcat_id');
+        return view('categories.create')->with('supCatName', $supCatName)->with('supCatId', $supCatId);
     }
 
     /**
@@ -47,6 +49,7 @@ class CategoriesController extends Controller
         //Create Ingredient
         $cat = new Category;
         $cat->cat_name = $request->input('name');
+        $cat->supcat_id = $request->input('supCat');
         
         $cat->save();
 
