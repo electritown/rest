@@ -16,6 +16,13 @@ class IngredientsController extends Controller
      */
     public function index()
     {
+
+        //  Authentication 
+
+        // if(!Gate::allows('isAdmin', 'isCooker')){
+        //     abort(404, "Sorry this page is not Avilable");
+        // }
+
         $ingredients = Ingredient::orderBy('updated_at', 'desc')->paginate(10);
         return view('ingredients.index')->with('ingredients', $ingredients);
     }

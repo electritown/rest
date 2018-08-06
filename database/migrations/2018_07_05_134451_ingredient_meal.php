@@ -14,11 +14,11 @@ class IngredientMeal extends Migration
     public function up()
     {
         Schema::create('ingredient_meal', function (Blueprint $table) {
-            $table->integer('item_id');
-            $table->integer('ing_id');
+            $table->integer('item_id')->unsigned();
+            $table->integer('ing_id')->unsigned();
             $table->double('amount');
             $table->foreign('item_id')->references('item_id')->on('meals');
-            $table->foreign('ing_id')->references('ing_id')->on(' ingredients');
+            $table->foreign('ing_id')->references('ing_id')->on('ingredients');
             $table->timestamps();
         });
     }

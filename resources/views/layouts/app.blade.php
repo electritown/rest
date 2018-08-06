@@ -17,6 +17,10 @@
         <div class="container">
             @include('inc.messages')
             @yield('content')
-        </div> 
+        </div>
+
+
+        
+        <script src ="{{asset('js/app.js')}}"> </script>
     </body>
 </html>

@@ -19,7 +19,6 @@ class CategoryMeal extends Migration
             $table->foreign('item_id')->references('item_id')->on('meals');
             $table->foreign('cat_id')->references('cat_id')->on('categories');
 
-            $table->timestamps();
         });
     }
 

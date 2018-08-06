@@ -165,6 +165,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Brian2694\Toastr\ToastrServiceProvider::class,
+        
 
         /*
          * Package Service Providers...
@@ -179,11 +180,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        //Voyager
-        TCG\Voyager\VoyagerServiceProvider::class,
         //pdf 
         Barryvdh\DomPDF\ServiceProvider::class,
-        
+        //Backpack
+        Backpack\Base\BaseServiceProvider::class,
+
 
     ],
 

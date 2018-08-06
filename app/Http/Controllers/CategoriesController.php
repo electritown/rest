@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Meal;
-use App\CategoryMeal ;
+use App\CategoryMeal;
 use App\Supcategory;
+use App\ingcategory;
 
 class CategoriesController extends Controller
 {
@@ -17,9 +18,16 @@ class CategoriesController extends Controller
      */
     public function index()
     {   
+
+        //  Authentication 
+
+        // if(!Gate::allows('isAdmin', 'isCooker')){
+        //     abort(404, "Sorry this page is not Avilable");
+        // }
+
         $categories = Category::orderBy('updated_at', 'desc')->paginate(10);
-        
-        return view('categories.index')->with('categories', $categories);
+        $ingCats = ingcategory::orderBy('updated_at', 'desc')->paginate(10);
+        return view('mealsCategories.index')->with('categories', $categories)->with('ingCats', $ingCats);
     }
 
     /**
@@ -31,7 +39,7 @@ class CategoriesController extends Controller
     {
         $supCatName = Supcategory::pluck('supcat_name', 'supcat_id');
         $supCatId = Supcategory::pluck('supcat_id', 'supcat_id');
-        return view('categories.create')->with('supCatName', $supCatName)->with('supCatId', $supCatId);
+        return view('mealsCategories.create')->with('supCatName', $supCatName)->with('supCatId', $supCatId);
     }
 
     /**
@@ -76,7 +84,7 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $cat = Category::find($id);
-        return view('categories.edit')->with('cat', $cat);
+        return view('mealsCategories.edit')->with('cat', $cat);
     }
 
     /**

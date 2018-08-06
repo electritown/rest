@@ -55,3 +55,19 @@
         <h1>There is No Orders in the Cart</h1>
     @endif
 @endsection
+
+@section('script')
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#table_id').DataTable({
+                dom: 'Bfrtip',
+            buttons: [
+                'copy','csv', 'excel', 'pdf', 'print'
+            ]
+            });
+
+        });
+    </script>
+
+@endsection

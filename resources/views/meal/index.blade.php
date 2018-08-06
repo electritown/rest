@@ -8,17 +8,24 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     @foreach($supCategories as $supCat)
-                        <li style="margin-right:5px;" class="btn btn-info" href="#">{{$supCat->supcat_name}}</li>
+                        <li style="margin-right:5px;"><a class="btn btn-primary" href={{ url('/MealsController/findSupCat/'.$supCat->supcat_id) }}>{{$supCat->supcat_name}}</a></li>
                     @endforeach
+                    <br><br><br>
+                    @if($categories)
+                    @foreach($categories as $cat)
+                        <li style="margin-right:5px;"><a style="background-color:#000"  class="btn btn-primary" href={{ url('/MealsController/findCat/'.$cat->cat_id) }}>{{$cat->cat_name}}</a></li>
+                    @endforeach
+                    @endif
                 </ul>
                 <ul class="ml-auto">
-                    <li><a href="/meals/create" class="btn btn-default pull-right">Create Item</a></li>
+                    <li><a class="btn btn-default pull-right" href="/meals/create">Create Item</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
             </div>
         </div>
 
     <hr />
+    @if($items)
     @if(count($items) > 0)
         @foreach($items as $item)
             <div class="well">
@@ -69,6 +76,7 @@
         {{$items->links()}}
     @else
         <p>No Items Found</p>
+    @endif
     @endif
     
 @endsection

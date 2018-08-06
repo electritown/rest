@@ -9,14 +9,14 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "backpack/base": "0.7.x",
         "barryvdh/laravel-dompdf": "^0.8.2",
         "brian2694/laravel-toastr": "^5.5",
         "gloudemans/shoppingcart": "^2.5",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
-        "niklasravnsborg/laravel-pdf": "^2.0",
-        "tcg/voyager": "^1.1"
+        "niklasravnsborg/laravel-pdf": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -63,4 +63,5 @@
             "url": "https://larapack.io"
         }
     }
+
 }

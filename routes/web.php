@@ -13,25 +13,26 @@ use TCG\Voyager\Facades\Voyager;
 */
 
 Route::get('/', 'PagesController@index');
-Route::get('/orders', 'PagesController@orders');
 
 Route::resource('ingredients', 'IngredientsController');
 Route::resource('meals', 'MealsController');
 Route::resource('users', 'UserController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('cart', 'CartsController');
-Route::resource('reservation', 'ReservationsController');
+Route::resource('table','TablesController');
+Route::resource('people','PeoplesController');
+Route::resource('orders','OrdersController');
+
+
 Route::get('/f',function(){
-    return Voyager::view('voyager::test');
+    return view('test');
 
-});
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
 });
 
 Route::get('/generate-pdf','HomeController@generatePDF');
-Route::get('/CategoriesController/findCategory/{id}', 'CategoriesController@findCategory');
 
+// Ingredients Categories redirects
+Route::resource('ingCategories', 'IngCategoriesController');
+Route::get('/MealsController/findCat/{id}','MealsController@findCat');
+Route::get('/MealsController/findSupCat/{id}','MealsController@findSupCat');
 

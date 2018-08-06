@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('cat_id');
             $table->string('cat_name');
             $table->integer('supcat_id')->unsigned();
-            $table->foreign('cat_id')->references('supcat_id')->on('supcategory'); 
+            $table->foreign('supcat_id')->references('supcat_id')->on('supcategories'); 
 
             $table->timestamps();
         });

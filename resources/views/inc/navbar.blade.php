@@ -11,11 +11,22 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li ><a href="/">Home</a></li>
-          <li><a href="/reservation">Reservations</a></li>
-          <li><a href="/meals">Meals</a></li>
-          <li><a href="/ingredients">Ingredients</a></li>
-          <li><a href="/categories">Categories</a></li>
+
+            <li ><a href="/">Home</a></li>
+
+          {{-- Authentication --}}
+          {{-- @can('isAdmin', 'isWaiter') --}}
+            <li><a href="/table">Tables</a></li>
+            <li><a href="/meals">Meals</a></li>
+            <li><router-link to="/example ">Go to Foo</router-link></li>
+          {{-- @endcan --}}
+
+          {{-- Authentication --}}
+          {{-- @can('isAdmin', 'isCooker') --}}
+            <li><a href="/ingredients">Ingredients</a></li>
+            <li><a href="/categories">Categories</a></li>
+          {{-- @endcan --}}
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class=""><a class="fa fa-shopping-cart" href="{{ url('/cart') }}">Cart ({{ Cart::instance('default')->count(false) }})</a></li>

@@ -7,6 +7,8 @@ use App\Meal;
 use App\Ingredient;
 use App\Category;
 use App\Supcategory;
+use Gate ;
+use Session;
 
 
 class MealsController extends Controller
@@ -14,14 +16,22 @@ class MealsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response 
      */
     public function index()
     {
-        $items = Meal::orderBy('updated_at', 'desc')->paginate(10);
-        $supCategories = Supcategory::All();
 
-        return view('meal.index')->with('items', $items)->with('supCategories', $supCategories);
+        //  Authentication 
+        
+        // if(!Gate::allows('isAdmin', 'isWaiter')){
+        //     abort(404, "Sorry this page is not Avilable");
+        // }
+ 
+
+        $items = null ; //= Meal::orderBy('updated_at', 'desc')->paginate(10);
+        $supCategories = Supcategory::All();
+        $categories = null ;
+        return view('meal.index')->with('items', $items)->with('supCategories', $supCategories)->with('categories', $categories);
 
     }
 
@@ -155,12 +165,18 @@ class MealsController extends Controller
         return redirect('/meals')->with('success', 'Item Removed');
     }
     public function findCat($id)
-    {    //$items = DB::table('meals')->where('cat_id', '=', $id)->get();
+    {
         $items = Meal::where('cat_id',$id)->paginate(10);
-         $categories = Category::All();
-         return  view('meal.index')->with('items',$items)->with('categories', $categories);
-        
-        
+        $supCategories = Supcategory::All();
+        $categories = Category::where('supcat_id' ,Session::get('supCatId') )->paginate(10);
+        return view('meal.index')->with('items', $items)->with('supCategories', $supCategories)->with('categories', $categories);
     }
 
+    public function findSupCat($catId)
+    {   $items =  null;
+        Session::put('supCatId', $catId);
+        $supCategories = Supcategory::All();
+        $categories = Category::where('supcat_id' ,$catId)->paginate(10);
+        return view('meal.index')->with('items', $items)->with('supCategories', $supCategories)->with('categories', $categories);
+    }
 }
