@@ -9,7 +9,7 @@
             <tr>
                 <th>Name</th>
                 <th>Price</th>
-                <th>qty</th>      
+                <th>quantity</th>      
             </tr>
         </thead>
         <tbody>
